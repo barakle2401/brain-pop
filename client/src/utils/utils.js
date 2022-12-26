@@ -11,3 +11,21 @@ export const formatDate = (timestamp) => {
 
   return `${month}, ${day}, ${year} ${time}`;
 };
+
+export const getData = async (url) => {
+  try {
+    const response = await fetch(url);
+    if (response.ok) {
+      return await response.json();
+    }
+  } catch (error) {
+    alert(`${error}, please make sure local server is running at port 3000`);
+    return [];
+  }
+};
+
+export const fromV2ToV1Structure = (activities) => {
+  return activities.flatMap((item) =>
+    item.activities.map((activity) => ({ ...activity, resource_type: item.resource_type }))
+  );
+};

@@ -9,9 +9,11 @@
 :root {
     --green: #008081;
     --light-green: #edfdfd;
-    --gray: #929699;
+    --gray: #d8d8d8;
     --heavy-gray: #494f55;
     --light-yellow: #fcf8e4;
+    --bp: #1a9898;
+    --bpjr: #f7b70d;
 }
 
 .heavy-gray {
@@ -22,9 +24,25 @@
     color: var(--green);
 }
 
+.bp-bg-color {
+    background-color: var(--bp);
+}
+
+.bpjr-bg-color {
+    background-color: var(--bpjr);
+}
+
 /*text*/
 .capitalize {
     text-transform: capitalize;
+}
+
+.text-center {
+    text-align: center;
+}
+
+h3 {
+    margin-bottom: 0;
 }
 
 .bold {
@@ -96,6 +114,10 @@
     justify-content: center;
 }
 
+.align-center {
+    align-items: center;
+}
+
 .pointer {
     cursor: pointer;
 }
@@ -106,7 +128,7 @@
     transition: all 0.2s;
 }
 
-/*arrows*/
+/*icons*/
 .arrow {
     border: solid green;
     border-width: 0 3px 3px 0;
@@ -119,4 +141,10 @@
 .down {
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
+}
+
+.icon {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
 }

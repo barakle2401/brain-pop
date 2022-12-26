@@ -15,6 +15,10 @@ export const RESOURCES_TYPES = {
   word_play: { name: "Word Play", score: false, zoom: true },
 };
 
+export const BP_PRODUCT_TYPE = "bp";
+
+export const ROUTE_NAME_V1 = "homeV1";
+
 export const MONTHS = [
   "January",
   "February",

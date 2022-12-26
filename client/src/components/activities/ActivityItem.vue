@@ -1,7 +1,7 @@
 <template>
   <div class="item-box">
     <div class="d-flex">
-      <img class="icon" :src="imagePath" alt="icon" />
+      <img :class="getIconClass()" :src="imagePath" alt="icon" />
       <div class="d-flex flex-column space-around ml-5">
         <span class="capitalize bold heavy-gray">{{ activityTitle }}</span>
         <span>{{ dateCreated }}</span>
@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import { formatDate } from "@/utils/utils";
 import { RESOURCES_TYPES } from "@/components/activities/constants";
+import activityItemMixin from "@/mixins/ativityItemMixin";
 export default {
   name: "ActivityItem",
   props: {
@@ -30,32 +30,22 @@ export default {
       required: true,
     },
   },
+  mixins: [activityItemMixin],
   computed: {
-    activityTitle() {
-      return `${this.activity.topic_data.name} ${
-        RESOURCES_TYPES[this.activity.resource_type].name
-      }`;
-    },
-    imagePath() {
-      //for some reason using iconPath is not working well...
-      const nameWithoutSpaces = this.activity.topic_data.name.replace(/\s+/g, "");
-      return require(`../../../../assets/topics/${nameWithoutSpaces}.png`);
-    },
-    dateCreated() {
-      return formatDate(this.activity.d_created);
-    },
     isViewable() {
       return RESOURCES_TYPES[this.activity.resource_type].zoom;
-    },
-    showScore() {
-      return RESOURCES_TYPES[this.activity.resource_type].score;
     },
   },
   methods: {
     hideActivity() {
       this.$emit("hideActivity", this.activity.id);
     },
-    viewActivity() {},
+    viewActivity() {
+      this.$router.push({
+        name: "viewActivityItem",
+        params: { id: this.activity.id },
+      });
+    },
   },
 };
 </script>
@@ -71,9 +61,6 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-.icon {
-  height: 50px;
-  width: 50px;
+  background-color: white;
 }
 </style>

@@ -3,12 +3,12 @@
     <h5 class="title">Filter By:</h5>
     <div class="d-flex">
       <button
-        @click="filter(r)"
+        @click="filter(r.key)"
         :key="r.key"
         v-for="r in resources"
         :class="[{ active: r.selected }, 'filter-button hover pointer']"
       >
-        {{ r.value.name }}
+        <i v-if="r.selected" class="fa fa-check-circle"></i> {{ r.value.name }}
       </button>
     </div>
   </div>
@@ -28,12 +28,11 @@ export default {
     };
   },
   methods: {
-    filter(resource) {
-      console.log(this.resources);
+    filter(resourceKey) {
       this.resources.forEach((r) => {
-        r.selected = r.key === resource.key;
+        r.selected = r.key === resourceKey;
       });
-      console.log(resource);
+      this.$emit("updateFilter", resourceKey);
     },
   },
 };
